@@ -6,6 +6,16 @@ builder.Services.AddDbContext<viveiro_backContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("viveiro_backContext") ?? throw new InvalidOperationException("Connection string 'viveiro_backContext' not found.")));
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin(); // Permite cualquier origen
+            builder.AllowAnyMethod(); // Permite cualquier método HTTP
+            builder.AllowAnyHeader(); // Permite cualquier header
+        });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
